@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -12,16 +12,7 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
+    protected $guarded = [];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -41,4 +32,38 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Checking user is admin
+     */
+    public function isAdmin()
+    {
+        return $this->is_admin == 1;
+    }
+
+    public function courses()
+    {
+        return $this->belongsToMany(Course::class)
+            ->withPivot(
+                'enroll_status',
+                'payment_status',
+                'enroll_time',
+                'payment_time'
+            )
+            ->withTimestamps();
+    }
+
+    public function lessons()
+    {
+        return $this->belongsToMany(Lesson::class)
+            ->withPivot(
+                'passed'
+            )
+            ->withTimestamps();
+    }
+
+    public function enrolledCourses()
+    {
+        return $this->belongsToMany(Course::class)->wherePivot('enroll_status', 1);
+    }
 }

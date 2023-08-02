@@ -1,77 +1,60 @@
-@extends('layouts.app')
+@extends('master')
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+@section('title', 'REGISTER')
 
-                <div class="card-body">
+@section('main')
+    <!--Main layout-->
+    <div class="container mt-5">
+        <!--Section: Content-->
+        <section class="text-center">
+
+            <div class="row d-flex justify-content-center">
+                <div class="col-6">
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
-
-                        <div class="row mb-3">
-                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input name="name" type="name" class="form-control" id="name" aria-describedby="emailHelp" placeholder="First name">
+                            {{--                            <small id="emailHelp" class="form-text text-muted">Some text.</small>--}}
                         </div>
 
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
+                        <div class="form-group">
+                            <label for="surname">Surname</label>
+                            <input name="surname" type="text" class="form-control" id="surname" aria-describedby="emailHelp" placeholder="Last name">
+                            {{--                            <small id="emailHelp" class="form-text text-muted">Some text.</small>--}}
                         </div>
 
-                        <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Email address</label>
+                            <input name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                         </div>
 
-                        <div class="row mb-3">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            </div>
+                        <div class="form-group">
+                            <label for="phone">Phone</label>
+                            <input name="phone" type="tel" class="form-control" id="phone" aria-describedby="emailHelp" placeholder="+380634139684">
+{{--                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>--}}
                         </div>
 
-                        <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
-                                </button>
-                            </div>
+                        <div class="form-group">
+                            <label for="Password">Password</label>
+                            <input name="password" type="password" class="form-control" id="Password" placeholder="Enter password">
+                            <small id="emailHelp" class="form-text text-muted">Minimum 8 symbols.</small>
                         </div>
+
+                        <div class="form-group">
+                            <label for="password_confirmation">Password confirm</label>
+                            <input name="password_confirmation" type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter password">
+{{--                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>--}}
+                        </div>
+
+                        <button type="submit" class="btn btn-primary m-3">Submit</button>
                     </form>
                 </div>
             </div>
-        </div>
+
+        </section>
+
     </div>
-</div>
+    <!--Main layout-->
 @endsection
